@@ -11,6 +11,7 @@ epub() {
   metafound=`zipgrep  '<dc:'$1'.*>(.*)</dc:'$1'>' "$2" $fileloc`
   fulltitle=`expr "$metafound" : '.*<dc:'$1'.*>\(.*\)</dc:'$1'>.*'`
   title=`echo $fulltitle |sed 's/\ //g'`
+  list "$2"
   echo "mv $2 $title.epub"
   mv $2 $title.epub
   if [[ -a "$codefile" ]]; then
@@ -21,6 +22,7 @@ epub() {
     echo "mv $codefilez $title.code.zip"
     mv $codefilez $title.code.zip
   fi
+  list "$title"
 }
 
 dry() {
@@ -30,6 +32,7 @@ dry() {
   metafound=`zipgrep  '<dc:'$1'.*>(.*)</dc:'$1'>' "$2" $fileloc`
   fulltitle=`expr "$metafound" : '.*<dc:'$1'.*>\(.*\)</dc:'$1'>.*'`
   title=`echo $fulltitle |sed 's/\ //g'`
+  list "$2"
   echo "mv $2 $title.epub"
   if [[ -a "$codefile" ]]; then
     echo "mv $codefile $title.code.zip"

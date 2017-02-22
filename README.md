@@ -36,6 +36,29 @@ repackt epub 978
 
 this will move a file called 978132434345.epub to TheProperTitle.epub and any other files which match the $STRING
 
+##### list
+
+```
+➜  Backt ./repackt list 978
+-rw-r--r-- 1 user user 8.6M Feb 20 22:27 97812345678.epub
+-rw-r--r-- 1 user user 583K Feb 20 22:27 97812345678_code.zip
+```
+
+##### dry
+
+```
+➜  Backt ./repackt dry 978 
+mv 97812345678.epub MasteringLinuxShellScripting.epub
+mv 97812345678_code.zip MasteringLinuxShellScripting.code.zip
+```
+
+##### epub
+
+```
+➜  Backt ./repackt epub 978 
+mv 97812345678.epub MasteringLinuxShellScripting.epub
+mv 97812345678_code.zip MasteringLinuxShellScripting.code.zip
+```
 
 ###### To do
    implement renamers for `mobi` and `pdf` as well
