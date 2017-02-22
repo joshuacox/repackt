@@ -56,11 +56,11 @@ mv 97812345678_code.zip MasteringLinuxShellScripting.code.zip
 
 ```
 ➜  Backt ./repackt epub 978
--rw-r--r-- 1 thoth thoth 8.6M Feb 20 22:27 97812345678.epub
+-rw-r--r-- 1 user user 8.6M Feb 20 22:27 97812345678.epub
 mv 97812345678.epub MasteringLinuxShellScripting.epub
 mv 97812345678_code.zip MasteringLinuxShellScripting.code.zip
--rw-r--r-- 1 thoth thoth 583K Feb 20 22:27 MasteringLinuxShellScripting.code.zip
--rw-r--r-- 1 thoth thoth 8.6M Feb 20 22:27 MasteringLinuxShellScripting.epub
+-rw-r--r-- 1 user user 583K Feb 20 22:27 MasteringLinuxShellScripting.code.zip
+-rw-r--r-- 1 user user 8.6M Feb 20 22:27 MasteringLinuxShellScripting.epub
 ```
 
 ###### To do
