@@ -47,7 +47,7 @@ this will move a file called 978132434345.epub to TheProperTitle.epub and any ot
 ##### dry
 
 ```
-➜  Backt ./repackt dry 978 
+➜  Backt ./repackt dry 978
 mv 97812345678.epub MasteringLinuxShellScripting.epub
 mv 97812345678_code.zip MasteringLinuxShellScripting.code.zip
 ```
@@ -55,9 +55,12 @@ mv 97812345678_code.zip MasteringLinuxShellScripting.code.zip
 ##### epub
 
 ```
-➜  Backt ./repackt epub 978 
+➜  Backt ./repackt epub 978
+-rw-r--r-- 1 thoth thoth 8.6M Feb 20 22:27 97812345678.epub
 mv 97812345678.epub MasteringLinuxShellScripting.epub
 mv 97812345678_code.zip MasteringLinuxShellScripting.code.zip
+-rw-r--r-- 1 thoth thoth 583K Feb 20 22:27 MasteringLinuxShellScripting.code.zip
+-rw-r--r-- 1 thoth thoth 8.6M Feb 20 22:27 MasteringLinuxShellScripting.epub
 ```
 
 ###### To do
