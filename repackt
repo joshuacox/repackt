@@ -1,0 +1,79 @@
+#!/bin/bash
+#
+# move epubs downloaded from packtpub
+# and make them have their actual titles
+# instead of the random number they come with
+
+epub() {
+  codefile=$(echo $2|sed 's/\.epub/_code.zip/')
+  codefilez=$(echo $2|sed 's/\.epub/.zip/')
+  fileloc=`unzip -l "$2" | grep -Po '\b[^\s-]*\.opf\b'`
+  metafound=`zipgrep  '<dc:'$1'.*>(.*)</dc:'$1'>' "$2" $fileloc`
+  fulltitle=`expr "$metafound" : '.*<dc:'$1'.*>\(.*\)</dc:'$1'>.*'`
+  title=`echo $fulltitle |sed 's/\ //g'`
+  echo "mv $2 $title.epub"
+  mv $2 $title.epub
+  if [[ -a "$codefile" ]]; then
+    echo "mv $codefile $title.code.zip"
+    mv $codefile $title.code.zip
+  fi
+  if [[ -a "$codefilez" ]]; then
+    echo "mv $codefilez $title.code.zip"
+    mv $codefilez $title.code.zip
+  fi
+}
+
+dry() {
+  codefile=$(echo $2|sed 's/\.epub/_code.zip/')
+  codefilez=$(echo $2|sed 's/\.epub/.zip/')
+  fileloc=`unzip -l "$2" | grep -Po '\b[^\s-]*\.opf\b'`
+  metafound=`zipgrep  '<dc:'$1'.*>(.*)</dc:'$1'>' "$2" $fileloc`
+  fulltitle=`expr "$metafound" : '.*<dc:'$1'.*>\(.*\)</dc:'$1'>.*'`
+  title=`echo $fulltitle |sed 's/\ //g'`
+  echo "mv $2 $title.epub"
+  if [[ -a "$codefile" ]]; then
+    echo "mv $codefile $title.code.zip"
+  fi
+  if [[ -a "$codefilez" ]]; then
+    echo "mv $codefilez $title.code.zip"
+  fi
+}
+
+usage() {
+	echo -e "repackt - the packtpub epub file renamer\n"
+	echo 'Usage:'
+	echo 'repackt list $STRING - show all files that have $STRING in their name'
+	echo 'repackt dry $STRING - dry run show the moves that would take place for all files that have $STRING in their name'
+	echo 'repackt epub $STRING - rename all files that have $STRING in their name'
+	echo 'e.g.'
+	echo -e "\nrepackt epub 978\n"
+  echo '-- which will move a file called 978132434345.epub to TheProperTitle.epub and any other files which match the $STRING'
+}
+
+# list will show you what files you might be moving
+list() {
+  STRING='978'
+	if [[ ! -z "$1" ]]; then
+		local STRING=$1
+	fi
+  ls -lh |grep $STRING
+}
+
+main() {
+	local cmd=$1
+
+	if [[ -z "$cmd" ]]; then
+		usage
+		exit 1
+	elif [[ $cmd == "list" ]]; then
+    list "$2"
+	elif [[ $cmd == "epub" ]]; then
+    for i in $(ls $2*.epub); do epub title $i; done
+	elif [[ $cmd == "dry" ]]; then
+    for i in $(ls $2*.epub); do dry title $i; done
+	else
+		usage
+	fi
+}
+
+main "$@"
